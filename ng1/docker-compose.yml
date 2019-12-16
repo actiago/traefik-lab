@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nginx1:
+    image: nginx
+    labels:
+      - "traefik.backend=nginx1"
+      - "traefik.frontend.rule=Host:ng01.docker.localhost"
+      - "traefik.port=80"
+      - "traefix.port=443"
+      - "traefik.frontend.entryPoints=http"
