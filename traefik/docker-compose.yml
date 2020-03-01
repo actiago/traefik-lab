@@ -1,5 +1,5 @@
 
-version: '3'
+version: '3.3'
 
 services:
   reverse-proxy:
@@ -9,5 +9,14 @@ services:
       - "80:80"
       - "443:443"     # The HTTP port
       - "8080:8080" # The Web UI (enabled by --api)
+    labels:
+      - "traefik.frontend.rule=Host:monitor.docker.localhost"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker event
+      - ./traefik.toml:/traefik.toml
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
