@@ -7,4 +7,11 @@ services:
       - "traefik.backend=nginx1"
       - "traefik.frontend.rule=Host:ng01.docker.localhost"
       - "traefik.port=80"
+      - "traefik.docker.network=web"
       - "traefik.frontend.entryPoints=http"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

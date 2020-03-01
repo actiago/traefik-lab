@@ -8,3 +8,9 @@ services:
       - "traefik.frontend.rule=Host:ng02.docker.localhost"
       - "traefik.port=80"
       - "traefik.frontend.entryPoints=http"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
