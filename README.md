@@ -8,19 +8,19 @@ Trate-se de um simples laboratório de estudos do [Traefik](https://docs.traefik
 
 ### Proxy reverso
 
--[Traefik](https://docs.traefik.io/)
+- [Traefik](https://docs.traefik.io/)
 
 ### Aplicações
 
 - [Containous Whoami](https://github.com/containous/whoami)
-- [Composetest](https://docs.docker.com/compose/gettingstarted/) # Retirado do documento [_Geting strted_](https://docs.docker.com/compose/gettingstarted/) do _docker-compose_.
 - [Docker Nginx Hostname](https://github.com/stenote/docker-nginx-hostname) # 3 containers de nome ng01, ng02 e ng03.
+- [wordpress](https://www.digitalocean.com/community/tutorials/how-to-use-traefik-as-a-reverse-proxy-for-docker-containers-on-debian-9)
 
 ## Estrutura
 
 ```bash
 .
-├── composetest
+├── images
 ├── ng1
 │   └── files
 │       └── root
@@ -46,18 +46,25 @@ Trate-se de um simples laboratório de estudos do [Traefik](https://docs.traefik
 │           └── run
 │               └── nginx
 ├── traefik
-└── whoami
+├── whoami
+└── wordpress
 ```
 
 ## Uso
 
-Como testo cada aplicação separadamente, inicio o container _traefik_ e as outras em seguida para analisar seu comportamento.
+Como testo cada aplicação separadamente, primeiro inicializa-se o container _traefik_ seguido das demais para analisar o comportamento de cada.
 
-### Ex:
+### Exemplos:
 
 #### Iniciando o containeer _traefik_
 
 ![running](images/running.png "Iniciando o container traefik")
+
+Após a inicialização do _traefik_ acesse seu dashboard pelo endereço web ```http://localhost:8080```
+
+![traefik-dashboard](images/dashboard.png)
+
+Cada container "cadastrado" no _traefik_ através do uso da lable ```traefik.frontend.rule=Host:[nome-do-container].docker.localhost``` será apresentada no dashboard principal indicando as suas informações de frontend e backend.
 
 #### Iniciando o conatiner _whoami_
 
@@ -65,19 +72,21 @@ Como testo cada aplicação separadamente, inicio o container _traefik_ e as out
 
 ## Testes
 
-Os testes são simples, utiliza-se o [```curl```](https://curl.haxx.se/) para realizar as requisições HTTP em cada serviço através de seu nome.
+Os testes são simples, utiliza-se o [```curl```](https://curl.haxx.se/) para realização de requisições HTTP em cada serviço através de seu nome.
 
 ### Ex:
 
-Exemplo de uma requisição ao containet _whoami_
+Exemplo de uma requisição ao container _whoami_
 
 ![teste](images/test.png "requisição ao container whoami")
 
+Nada o impede de acessar cada conainer através do navegador.
+
 ## ToDo
 
-- [ ] Explanação do arquivo ```traefik.toml``` e cada ``'docker-compose```
+- [ ] Explanação do arquivo ```traefik.toml``` e ``'docker-compose```
 - [ ] Uso de SSL com LetsEncrypt
-- [ ] Novas imagens _**nginx**_ com conteúdos diversos
+- [ ] Atualizar as imagens _**nginx**_ com diferentes conteúdos
 - [ ] Comparativo com proxy reverso feito com _nginx_
 - [ ] Teste com a versão 2 do _traefik_, incluindo o uso de portas não **HTTP**
 
