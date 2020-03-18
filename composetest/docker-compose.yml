@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    deploy:
+     replicas: 2
+  redis:
+    image: "redis:alpine"
+    labels:
+      - "traefik.frontend.rule=Host:composetest.docker.localhost"
+      - "traefik.port=5000"
