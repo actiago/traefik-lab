@@ -6,8 +6,19 @@ services:
       - "5000:5000"
     deploy:
      replicas: 2
-  redis:
-    image: "redis:alpine"
     labels:
       - "traefik.frontend.rule=Host:composetest.docker.localhost"
       - "traefik.port=5000"
+    networks:
+      - internal
+      - web
+  redis:
+    image: "redis:alpine"
+    labels:
+      - "traefik.anable=false"
+    networks:
+      - internal
+
+networks:
+  web:
+    external: true
