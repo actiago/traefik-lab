@@ -52,11 +52,21 @@ Trate-se de um simples laboratório de estudos do [Traefik](https://docs.traefik
 
 ## Uso
 
-Como testo cada aplicação separadamente, primeiro inicializa-se o container _traefik_ seguido das demais para analisar o comportamento de cada.
+Primeiro, execute o compose do _traefik_, em seguida execute os outros containers para analisar o funcionamento do proxy reverso.
 
 ### Exemplos:
 
 #### Iniciando o containeer _traefik_
+
+Navegue até o diretório do traefik e execute:
+
+```bash
+cd traefik
+```
+
+```bash
+docker-compose up -d
+```
 
 ![running](images/running.png "Iniciando o container traefik")
 
@@ -64,11 +74,7 @@ Após a inicialização do _traefik_ acesse seu dashboard pelo endereço web ```
 
 ![traefik-dashboard](images/dashboard.png)
 
-Cada container "cadastrado" no _traefik_ através do uso da lable ```traefik.frontend.rule=Host:[nome-do-container].docker.localhost``` será apresentada no dashboard principal indicando as suas informações de frontend e backend.
-
-#### Iniciando o conatiner _whoami_
-
-![running-01](images/running-01.png "Iniciando o conatiner _whoami_")
+Cada container "cadastrado" no _traefik_ através do uso da lable ```traefik.frontend.rule=Host:[nome-do-container].docker.localhost``` terá suas principais informações de rota, _backend_ e etc apresentadas no dashboard principal.
 
 ## Testes
 
